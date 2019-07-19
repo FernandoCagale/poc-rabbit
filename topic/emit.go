@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -27,16 +26,13 @@ func main() {
 	err = ch.ExchangeDeclare(
 		"logs_topic", // name
 		"topic",      // type
-		true,         // durable
+		false,        // durable
 		false,        // auto-deleted
 		false,        // internal
 		false,        // no-wait
 		nil,          // arguments
 	)
 	failOnError(err, "Failed to declare an exchange")
-
-	fmt.Println(severityFrom(os.Args))
-	fmt.Println(bodyFrom(os.Args))
 
 	body := bodyFrom(os.Args)
 	err = ch.Publish(
